@@ -32,26 +32,6 @@ pipeline {
             }
         }
     }
-//     stage('Pushing Image') {
-//       environment {
-//           registryCredential = 'dockerhub-credentials'
-//            }
-//       steps{
-//         script {
-//           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-//             dockerImage.push("latest")
-//           }
-//         }
-//       }
-//     }
-//     stage('Deploying Python container to Kubernetes') {
-//       steps {
-//         script {
-//           kubernetesDeploy(configs: "deployment.yaml, service.yaml")
-//         }
-//       }
-
-
     stage('Deploying Python container to Kubernetes') {
       steps {
         script {
@@ -60,9 +40,9 @@ pipeline {
 
           // Apply service YAML next
           sh 'kubectl apply -f service.yaml'
-            }
-          }
         }
+      }
+    }
 
 
   }
