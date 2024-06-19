@@ -11,13 +11,16 @@ pipeline {
 
       }
     }
-    stage('Build image') {
-      steps{
+  stage('Build image') {
+     steps {
         script {
-          dockerImage = docker.build dockerimagename
+          dockerImage = docker.build(imageName: dockerimagename, dockerfile: 'Dockerfile',
+                                     buildArgs: /* Your build arguments if needed */,
+                                     registryUrl: 'unix:///var/run/docker.sock')  // Explicitly specify socket path
         }
       }
     }
+
     stage('Push image') {
         steps{
             script {
