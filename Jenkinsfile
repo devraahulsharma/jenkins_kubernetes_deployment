@@ -60,10 +60,10 @@ pipeline {
 
           // Apply service YAML next
           sh 'kubectl apply -f service.yaml'
-    }
-  }
-}
+            }
+          }
+        }
 
-    }
+
   }
 }
