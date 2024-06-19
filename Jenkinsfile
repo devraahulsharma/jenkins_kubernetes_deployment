@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "bravinwasike/python-app"
+    dockerimagename = "raahulsharma96/python-app"
     dockerImage = ""
   }
   agent any
@@ -23,7 +23,7 @@ pipeline {
             script {
                 withCredentials([usernamePassword( credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
                     def registry_url = "registry.hub.docker.com/"
-                    bat "docker login -u $USER -p $PASSWORD ${registry_url}"
+                    sh "docker login -u $USER -p $PASSWORD ${registry_url}"
                     docker.withRegistry("https://${registry_url}", "dockerhub-credentials") {
                         // Push your image now
                         dockerImage.push("latest")
