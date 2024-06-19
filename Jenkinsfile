@@ -11,14 +11,14 @@ pipeline {
 
       }
     }
-  stage('Build image') {
-     steps {
+    stage('Build image') {
+      steps{
         script {
-          dockerImage = docker.build(imageName: dockerimagename, dockerfile: 'Dockerfile', registryUrl: 'unix:///var/run/docker.sock')
+          dockerImage = docker.build dockerimagename
+
         }
       }
     }
-
     stage('Push image') {
         steps{
             script {
