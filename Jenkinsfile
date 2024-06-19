@@ -44,12 +44,26 @@ pipeline {
 //         }
 //       }
 //     }
+//     stage('Deploying Python container to Kubernetes') {
+//       steps {
+//         script {
+//           kubernetesDeploy(configs: "deployment.yaml, service.yaml")
+//         }
+//       }
+
+
     stage('Deploying Python container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml, service.yaml")
-        }
-      }
+          // Apply deployment YAML first
+          sh 'kubectl apply -f deployment.yaml'
+
+          // Apply service YAML next
+          sh 'kubectl apply -f service.yaml'
+    }
+  }
+}
+
     }
   }
 }
