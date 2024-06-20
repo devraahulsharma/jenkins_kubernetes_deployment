@@ -46,17 +46,17 @@ pipeline {
         }
       }
     }
-    stage('Configure kubectl') {
-      steps {
-        script {
-          // Copy the kubeconfig from Minikube to the Jenkins workspace
-          sh '''
-          mkdir -p /home/jenkins/.kube
-          cp /root/.kube/config /home/jenkins/.kube/config
-          '''
-        }
-      }
-    }
+    // stage('Configure kubectl') {
+    //   steps {
+    //     script {
+    //       // Copy the kubeconfig from Minikube to the Jenkins workspace
+    //       sh '''
+    //       mkdir -p /home/jenkins/.kube
+    //       cp /root/.kube/config /home/jenkins/.kube/config
+    //       '''
+    //     }
+    //   }
+    // }
     stage('Deploying Python container to Kubernetes') {
       steps {
         script {
