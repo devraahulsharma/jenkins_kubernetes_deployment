@@ -57,15 +57,23 @@ pipeline {
     //     }
     //   }
     // }
-    stage('Deploying Python container to Kubernetes') {
+    // stage('Deploying Python container to Kubernetes') {
+    //   steps {
+    //     script {
+    //       sh '''
+    //       export PATH=/var/jenkins_home/bin:$PATH
+    //       export KUBECONFIG=/home/jenkins/.kube/config
+    //       kubectl apply -f deployment.yaml
+    //       kubectl apply -f service.yaml
+    //       '''
+    //     }
+    //   }
+    // }
+    stage('Deploying container to Kubernetes') {
       steps {
         script {
-          sh '''
-          export PATH=/var/jenkins_home/bin:$PATH
-          export KUBECONFIG=/home/jenkins/.kube/config
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
-          '''
+          kubernetesDeploy(configs: "deployment.yaml", 
+                                         "service.yaml")
         }
       }
     }
