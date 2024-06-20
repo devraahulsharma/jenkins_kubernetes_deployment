@@ -2,6 +2,7 @@ pipeline {
   environment {
     dockerimagename = "raahulsharma96/python-app"
     dockerImage = ""
+    KUBECONFIG_PATH = "/home/jenkins/.kube/config" // Path to kubeconfig in Minikube
   }
   agent any
   stages {
@@ -45,11 +46,23 @@ pipeline {
         }
       }
     }
+    stage('Configure kubectl') {
+      steps {
+        script {
+          // Copy the kubeconfig from Minikube to the Jenkins workspace
+          sh '''
+          mkdir -p /home/jenkins/.kube
+          cp /root/.kube/config /home/jenkins/.kube/config
+          '''
+        }
+      }
+    }
     stage('Deploying Python container to Kubernetes') {
       steps {
         script {
           sh '''
           export PATH=/var/jenkins_home/bin:$PATH
+          export KUBECONFIG=/home/jenkins/.kube/config
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
           '''
