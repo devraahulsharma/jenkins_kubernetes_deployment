@@ -38,10 +38,8 @@ pipeline {
           then
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             chmod +x kubectl
-            mkdir -p $HOME/bin
-            mv kubectl $HOME/bin/
-            export PATH=$HOME/bin:$PATH
-            echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
+            mkdir -p /var/jenkins_home/bin
+            mv kubectl /var/jenkins_home/bin/
           fi
           '''
         }
@@ -50,8 +48,11 @@ pipeline {
     stage('Deploying Python container to Kubernetes') {
       steps {
         script {
-          sh 'kubectl apply -f deployment.yaml'
-          sh 'kubectl apply -f service.yaml'
+          sh '''
+          export PATH=/var/jenkins_home/bin:$PATH
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          '''
         }
       }
     }
