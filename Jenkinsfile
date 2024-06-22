@@ -2,7 +2,9 @@ pipeline {
   environment {
     dockerimagename = "raahulsharma96/python-app"
     dockerImage = ""
-    KUBECONFIG_PATH = "/home/jenkins/.kube/config" // Path to kubeconfig in Minikube
+    // KUBECONFIG_PATH = "/home/jenkins/.kube/config" // Path to kubeconfig in Minikube
+    KUBECONFIG_PATH = "/home/raahul/.minikube/config" // Path to kubeconfig in Minikube
+
   }
   agent any
   stages {
@@ -73,7 +75,7 @@ pipeline {
       steps {
         script {
           // kubernetesDeploy(configs: "deployment.yaml", kubeconfigId:"kubernetes")
-          kubernetesDeploy(configs: "deployment.yaml", kubeconfig:"config.yaml")
+          kubernetesDeploy(configs: "deployment.yaml")
 
         }
       }
