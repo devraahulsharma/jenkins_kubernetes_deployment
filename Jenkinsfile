@@ -3,7 +3,7 @@ pipeline {
     dockerimagename = "raahulsharma96/python-app"
     dockerImage = ""
     // KUBECONFIG_PATH = "/home/jenkins/.kube/config" // Path to kubeconfig in Minikube
-    KUBECONFIG_PATH = "/home/raahul/.minikube/config" // Path to kubeconfig in Minikube
+    KUBECONFIG_PATH = "/home/raahul/.minikube/config/config.json" // Path to kubeconfig in Minikube
 
   }
   agent any
