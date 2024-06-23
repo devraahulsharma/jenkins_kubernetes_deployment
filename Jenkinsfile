@@ -4,7 +4,7 @@ pipeline {
     dockerImage = ""
     // KUBECONFIG_PATH = "/home/raahul/.kube/config" // Path to kubeconfig in Minikube
     // KUBECONFIG_PATH = "/home/raahul/.minikube/config/config.json" // Path to kubeconfig in Minikube
-    kubeconfigId:"my-config"
+    // kubeconfigId:"my-config"
 
   }
   agent any
@@ -75,9 +75,9 @@ pipeline {
     stage('Deploying container to Kubernetes') {
       steps {
         script {
-          // kubernetesDeploy(configs: "deployment.yaml", kubeconfigId:"my-config")
+          kubernetesDeploy(configs: "deployment.yaml", kubeconfigId:"my-config")
           // kubernetesDeploy(configs: "deployment.yaml")
-          sh 'kubectl apply -f deployment.yaml' // Assuming kubectl is installed and accessible
+          // sh 'kubectl apply -f deployment.yaml' // Assuming kubectl is installed and accessible
         }
       }
     }
