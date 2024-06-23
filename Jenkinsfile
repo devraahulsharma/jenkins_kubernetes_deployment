@@ -74,9 +74,9 @@ pipeline {
     stage('Deploying container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml", kubeconfigId:"my-config")
+          // kubernetesDeploy(configs: "deployment.yaml", kubeconfigId:"my-config")
           // kubernetesDeploy(configs: "deployment.yaml")
-
+          sh 'kubectl apply -f deployment.yaml' // Assuming kubectl is installed and accessible
         }
       }
     }
