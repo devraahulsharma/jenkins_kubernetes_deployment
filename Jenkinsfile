@@ -4,6 +4,7 @@ pipeline {
     dockerImage = ""
     // KUBECONFIG_PATH = "/home/raahul/.kube/config" // Path to kubeconfig in Minikube
     // KUBECONFIG_PATH = "/home/raahul/.minikube/config/config.json" // Path to kubeconfig in Minikube
+    kubeconfigId:"my-config"
 
   }
   agent any
