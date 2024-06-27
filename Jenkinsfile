@@ -63,21 +63,7 @@ pipeline {
     stage('Deploying Python container to Kubernetes') {
         steps {
             script {
-                sh '''
-                export PATH=/var/jenkins_home/bin:$PATH
-                export KUBECONFIG=/home/raahul/.kube/config
-                
-                # Check if the script exists before trying to execute it
-                if [ -f "/var/jenkins_home/workspace/nkins_kubernetes_deployment_main@tmp/durable-8b387b9c/script.sh.copy" ]; then
-                    chmod +x /var/jenkins_home/workspace/nkins_kubernetes_deployment_main@tmp/durable-8b387b9c/script.sh.copy
-                    /var/jenkins_home/workspace/nkins_kubernetes_deployment_main@tmp/durable-8b387b9c/script.sh.copy
-                else
-                    echo "Script not found or not generated."
-                fi
-                
-                kubectl apply -f deployment.yaml
-                kubectl apply -f service.yaml
-                '''
+              kubernetesDeploy (configs: 'deployment.yaml' kubeconfigId: 'k8sconfig')
             }
         }
     }
