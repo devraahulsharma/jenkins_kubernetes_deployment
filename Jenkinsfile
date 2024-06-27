@@ -65,7 +65,7 @@ pipeline {
         script {
           sh '''
           // export PATH=/var/jenkins_home/bin:$PATH
-          // export KUBECONFIG=/home/jenkins/.kube/config
+          export KUBECONFIG=/home/raahul/.kube/config
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
           '''
