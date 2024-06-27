@@ -63,7 +63,7 @@ pipeline {
     stage('Deploying Python container to Kubernetes') {
         steps {
             script {
-              kubernetesDeploy (configs: 'deployment.yaml' kubeconfigId: 'k8sconfig')
+              kubernetesDeploy (configs: 'deployment.yaml' ,kubeconfigId: 'k8sconfig')
             }
         }
     }
